@@ -9,3 +9,5 @@ requirements.txt
 README.md
 SECURITY.md
 node_modules
+tmp
+output

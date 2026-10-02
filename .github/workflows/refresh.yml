@@ -138,4 +138,3 @@ jobs:
           npx --yes vercel@62.0.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
           npx --yes vercel@62.0.0 build --prod --token="$VERCEL_TOKEN"
           npx --yes vercel@62.0.0 deploy --prebuilt --prod --archive=tgz --token="$VERCEL_TOKEN"
-
