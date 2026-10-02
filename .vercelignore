@@ -1,0 +1,11 @@
+.git
+.github
+cache
+tests
+pipeline
+*.py
+requirements.txt
+.env*
+README.md
+SECURITY.md
+node_modules

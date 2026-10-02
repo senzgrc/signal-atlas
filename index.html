@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Signal Atlas brings clarity to the vulnerability landscape. Explore CVEs, affected products, and known exploitation using NVD and CISA KEV data." />
+    <meta name="theme-color" content="#0b1322" />
+    <title>Signal Atlas · Vulnerability intelligence</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <a class="skip" href="#main" data-i="skip">Skip to content</a>
+    <main id="main">
+      <header class="site-header">
+        <div class="brand-bar">
+          <a class="brand" href="#main" aria-label="Signal Atlas">
+            <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 23V15M13 23V10M19 23V17M25 23V7"/><path class="brand-baseline" d="M5 26H27"/></svg></span>
+            <span>Signal <strong>Atlas</strong></span>
+          </a>
+          <nav class="primary-nav" aria-label="Main navigation"><a href="#dashboard" data-i="navOverview">Overview</a><a href="#insights" data-i="navInsights">Insights</a><a href="#explorer" data-i="navExplore">Explore CVEs</a><a href="#kev-catalog" data-i="navKev">KEV catalog</a></nav>
+          <div class="controls utility-controls"><button id="language" type="button" lang="fr">Français</button><button id="theme" type="button" aria-pressed="false" data-i="dark">Dark mode</button></div>
+        </div>
+        <section class="hero" aria-labelledby="hero-headline">
+          <div class="hero-copy"><p class="eyebrow" data-i="heroEyebrow">Open vulnerability intelligence</p><h1 id="hero-headline" data-i="heroHeadline">Make sense of the vulnerability landscape.</h1><p class="hero-subtitle" data-i="heroSubtitle">Explore CVEs, affected products, and known exploitation in one clear view.</p><a class="hero-link" href="#explorer"><span data-i="navExplore">Explore CVEs</span><span aria-hidden="true">↗</span></a></div>
+          <div class="hero-context"><div class="source-chips"><span>NVD</span><span>CISA KEV</span></div><p data-i="heroSources">Two trusted sources. One clear perspective.</p><div class="hero-meta"><span id="hero-range">2020–2026</span><span class="meta-divider" aria-hidden="true"></span><span data-i="heroOpen">Open data</span></div><svg class="hero-signal" viewBox="0 0 300 66" aria-hidden="true"><path class="signal-track" d="M0 47H300"/><path class="signal-muted" d="M0 52L35 47L65 50L100 34L135 39L170 24L205 29L240 13L270 19L300 7"/><path class="signal-main" d="M0 54L35 52L65 42L100 45L135 27L170 31L205 16L240 20L270 8L300 12"/><circle cx="270" cy="8" r="4"/></svg></div>
+        </section>
+      </header>
+      <section class="catalog-search" aria-labelledby="search-label">
+        <label id="search-label" for="search" data-i="searchCatalog">Search catalog</label>
+        <div class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><input id="search" type="search" maxlength="200" placeholder="CVE ID, publisher, product or description" aria-describedby="search-scope" /></div>
+        <div class="search-context"><p id="search-scope" data-i="sharedSearchScope">Search the KEV catalog and the loaded CVE month. Load a month below to explore its CVEs.</p><nav id="search-results" aria-label="Search results" aria-live="polite"><a id="search-cve-results" href="#explorer">CVE explorer</a><a id="search-kev-results" href="#kev-catalog">KEV catalog</a></nav></div>
+      </section>
+      <section class="dashboard-toolbar" id="dashboard" aria-labelledby="overview-title">
+        <div><h2 id="overview-title" data-i="overview">Vulnerability landscape</h2><p class="subtitle compact" data-i="overviewSub">Compare publication years. Follow the signals that matter.</p></div>
+        <div class="controls year-controls">
+          <label><span data-i="year">Year</span><select id="year" aria-label="Reference year"></select></label>
+          <label><span data-i="versus">vs</span><select id="comparison" aria-label="Comparison year"></select></label>
+        </div>
+      </section>
+      <div class="filter-line"><span id="severity-label" class="control-label" data-i="severity">Severity</span><div class="segment" id="severity-filter" role="group" aria-labelledby="severity-label"></div></div>
+      <p id="comparison-period" class="period-note" role="status"></p>
+      <section class="grid" id="kpis" aria-label="Overview metrics" aria-live="polite"></section>
+      <section id="strategic-insights" class="insight-strip" aria-label="Strategic signals"></section>
+      <section class="grid">
+        <article class="card span5"><h2 data-i="trend">Trend by year</h2><p class="subtitle" data-i="trendSub">Unique CVE records by publication year, in the current snapshot.</p><div id="trend"></div></article>
+        <article class="card span3"><h2 data-i="severityTitle">By severity</h2><p class="subtitle" id="severity-sub"></p><div id="severity-chart"></div></article>
+        <article class="card span4"><h2 data-i="categories">By product category</h2><p class="subtitle" data-i="categorySub">Published CPE data and supported category inference. Categories can overlap.</p><div id="category-chart"></div></article>
+      </section>
+      <section class="grid">
+        <div class="card span12 section-controls"><div><h2 data-i="rankings">Rankings</h2><p class="subtitle compact" data-i="rankSub">Choose a metric. Select a product to see its benchmark.</p></div><div class="segment" id="metric-filter" role="group" aria-label="Ranking metric"></div></div>
+        <article class="card span7"><h2 data-i="topProducts">Top 10 products</h2><p class="subtitle" id="product-limit"></p><div class="segment tabs" id="category-filter" role="group" aria-label="Product category"></div><div id="top-products"></div><div class="legend" id="ranking-legend"></div></article>
+        <article class="card span5"><h2 data-i="topPublishers">Top 10 publishers</h2><p class="subtitle" id="publisher-limit"></p><div id="top-publishers"></div></article>
+      </section>
+      <section class="grid insights-grid" id="insights" aria-label="Reported causes and potential impact">
+        <article class="card span6"><h2 data-i="causesTitle">Top reported weaknesses</h2><p class="subtitle" id="causes-sub"></p><div id="causes" class="insight-list"></div><p id="causes-coverage" class="coverage-note"></p></article>
+        <article class="card span6"><h2 data-i="impactsTitle">Potential impact</h2><p class="subtitle" id="impacts-sub"></p><div id="impacts" class="insight-list"></div><p id="impacts-coverage" class="coverage-note"></p></article>
+      </section>
+      <section class="card benchmark" id="benchmark" aria-labelledby="benchmark-title">
+        <h2 id="benchmark-title" data-i="benchmark">Product benchmark</h2><p class="subtitle" data-i="benchmarkSub">An observed comparison among the products included in this snapshot’s rankings.</p>
+        <div class="segment tabs" id="benchmark-mode" role="group" aria-label="Benchmark subject"></div>
+        <div class="controls product-control"><label for="product" data-i="product">Product</label><select id="product"></select></div>
+        <div class="controls publisher-control" hidden><label for="publisher" data-i="vendor">Publisher</label><select id="publisher"></select></div>
+        <p id="benchmark-sentence" class="insight" aria-live="polite"></p>
+        <p id="benchmark-publisher" class="coverage-note"></p>
+        <div class="two-columns"><div><h3 id="benchmark-average-title">CVEs per ranked product</h3><p class="subtitle" id="benchmark-average-sub"></p><div id="benchmark-bars"></div></div><div><h3 id="benchmark-trend-title">Product vs category average</h3><p class="subtitle" id="benchmark-trend-sub"></p><div id="product-trend"></div></div></div>
+        <div class="two-columns benchmark-details"><div><h3 data-i="causesTitle">Top reported weaknesses</h3><div id="benchmark-causes" class="insight-list"></div><p id="benchmark-causes-coverage" class="coverage-note"></p></div><div><h3 data-i="impactsTitle">Potential impact</h3><div id="benchmark-impacts" class="insight-list"></div><p id="benchmark-impacts-coverage" class="coverage-note"></p></div></div>
+      </section>
+      <section class="card executive-report" id="executive-report" aria-labelledby="report-title">
+        <div class="section-controls"><div><p class="eyebrow" data-i="reportEyebrow">Brief the decision makers</p><h2 id="report-title" data-i="reportTitle">Executive threat intelligence</h2><p class="subtitle compact" data-i="reportSub">Turn a product or category into an evidence-based strategic briefing.</p></div><span class="report-format" aria-hidden="true">PDF</span></div>
+        <div class="report-controls"><div class="segment" id="report-kind" role="group" aria-label="Report subject"></div><label id="report-product-control"><span data-i="product">Product</span><select id="report-product"></select></label><label id="report-category-control" hidden><span data-i="category">Product category</span><select id="report-category"></select></label><button class="primary" id="create-report" type="button" data-i="createReport">Create executive report</button></div>
+        <p id="report-scope" class="coverage-note"></p><p id="report-status" class="report-status" role="status" aria-live="polite"></p><a id="report-download" hidden download data-i="downloadReport">Download PDF</a>
+      </section>
+      <section class="card" id="priority" aria-labelledby="priority-title">
+        <div class="section-controls"><div><p class="eyebrow" data-i="tacticalEyebrow">From signal to action</p><h2 id="priority-title" data-i="priorityTitle">Recent known-exploited advisories</h2><p class="subtitle compact" data-i="prioritySub">Check affected versions, then follow the vendor’s mitigation or patch guidance.</p></div><a class="hero-link" href="#kev-catalog" data-i="navKev">KEV catalog</a></div>
+        <div id="priority-records" class="priority-list"></div><button id="priority-more" type="button" data-i="showMore">Show more</button><p id="priority-note" class="coverage-note"></p>
+      </section>
+      <section class="card explorer" id="explorer" aria-labelledby="explorer-title">
+        <div class="section-controls"><div><p class="eyebrow" data-i="inspect">Inspect the evidence</p><h2 id="explorer-title" data-i="explorer">CVE explorer</h2><p class="subtitle compact" data-i="explorerSub">Load one publication month from the cache. Search records and inspect advisory links.</p></div><span class="badge" id="explorer-count"></span></div>
+        <div class="explorer-controls"><label><span data-i="month">Publication month</span><select id="month"></select></label><button class="primary" id="load-month" type="button" data-i="loadMonth">Load month</button><label><span data-i="category">Product category</span><select id="record-category"></select></label><label><span data-i="severity">Severity</span><select id="record-severity"></select></label><label><span data-i="exploitation">Exploitation</span><select id="record-kev"></select></label><label><span data-i="recordStatus">NVD status</span><select id="record-status"></select></label></div>
+        <details class="additional-filters"><summary data-i="additionalFilters">More evidence filters</summary><div class="explorer-controls"><label><span data-i="reportedWeakness">Reported weakness</span><select id="record-cause"></select></label><label><span data-i="impactsTitle">Potential impact</span><select id="record-impact"></select></label></div></details>
+        <p id="record-message" class="muted" role="status"></p><div id="records"></div><div class="pagination" id="record-pagination"></div>
+      </section>
+      <section class="card explorer" id="kev-catalog" aria-labelledby="kev-title">
+        <div class="section-controls"><div><h2 id="kev-title" data-i="kevTitle">The full CISA KEV catalog</h2><p class="subtitle compact" data-i="kevSub">Includes legacy CVEs published before 2020. KEV membership identifies known exploitation, not a severity rating.</p></div><button id="load-kev" type="button" data-i="loadCatalog">Load catalog</button></div>
+        <p id="kev-message" class="muted" role="status"></p><div id="kev-records"></div><div id="kev-pagination" class="pagination"></div>
+      </section>
+      <footer class="site-footer">
+        <div class="footer-grid">
+          <div class="footer-brand"><a class="brand" href="#main">Signal <strong>Atlas</strong></a><p data-i="footerTag">A clearer perspective on vulnerability intelligence.</p><span class="footer-label" data-i="portfolio">An open-data portfolio project</span></div>
+          <section class="footer-data" aria-labelledby="footer-data-title"><h2 id="footer-data-title" data-i="footerData">Data transparency</h2><div class="cache-banner" aria-label="Data coverage"><span class="status-dot" aria-hidden="true"></span><div><p id="cache-status" role="status" data-i="loading">Loading the cached snapshot…</p><p id="coverage" class="muted"></p></div><button id="retry" type="button" hidden data-i="retry">Try again</button></div><div id="category-methodology"><h3 data-i="categoryMethodology">How categories are assigned</h3><p id="classification-note"></p><p id="weakness-source"></p></div></section>
+          <nav class="footer-sources" aria-label="Data sources"><h2 data-i="footerSources">Sources</h2><a href="https://nvd.nist.gov/" target="_blank" rel="noopener noreferrer">NVD <span aria-hidden="true">↗</span></a><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener noreferrer">CISA KEV <span aria-hidden="true">↗</span></a><a href="#explorer" data-i="navExplore">Explore CVEs</a></nav>
+        </div>
+        <div class="footer-bottom"><p data-i="scope">Counts use publication dates. Categories can overlap; inferred classifications are identified in record details. Unresolved records remain visible.</p></div>
+      </footer>
+    </main>
+    <dialog id="detail" aria-labelledby="detail-title"><div class="dialog-header"><h2 id="detail-title"></h2><button id="close-detail" type="button" data-i="close">Close</button></div><div id="detail-body"></div></dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "vulnerability-landscape",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "node scripts/check-data.mjs && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "python -m unittest discover -s tests -v",
+    "sync": "python cvefetcher.py && python fetch_cisakev.py && python export_dashboard.py"
+  },
+  "devDependencies": {
+    "vite": "8.3.1"
+  },
+  "dependencies": {
+    "jspdf": "4.2.1"
+  }
+}
