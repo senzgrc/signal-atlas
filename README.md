@@ -54,12 +54,13 @@ For a first local deployment after a complete import:
 ```sh
 npm run build
 npx vercel@62.0.0 link
+npx vercel@62.0.0 git disconnect --yes
 npx vercel@62.0.0 pull --yes --environment=production
 npx vercel@62.0.0 build --prod
 npx vercel@62.0.0 deploy --prebuilt --prod --archive=tgz
 ```
 
-The included `vercel.json` selects Vite, `dist`, and security headers. **Do not rely on an ordinary Git import to fetch data:** generated data is intentionally not committed. Use the included refresh workflow, or sync locally before deploying. The project checks for an exported cache before building.
+The included `vercel.json` selects Vite, an explicit Node dependency install, `dist`, and security headers. The Python fetchers run before deployment and are not installed by Vercel. **Do not rely on an ordinary Git import to fetch data:** generated data is intentionally not committed. Disconnect automatic Git deployments after linking; use the included refresh workflow, or sync locally before deploying. The project checks for an exported cache before building.
 
 The overview (`summary.json.gz`) and monthly record shards use deterministic gzip and are decompressed in the browser with `DecompressionStream`. The plain summary remains available for tooling; the build verifies both forms match. Summary decompression is limited to 16 MB; use a current Chrome, Edge, Firefox, or Safari. The build reports the total data size. Compression keeps the historical snapshot practical within [Vercel's CLI upload limits](https://vercel.com/docs/limits).
 
